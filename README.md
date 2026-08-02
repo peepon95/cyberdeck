@@ -32,55 +32,103 @@ their display, input, power and boot settings to be tested.
 - E-Reader — bring your own legal `.txt` files
 - Journal — entries stay on the participant's device
 
-## Install on the Raspberry Pi
+## Install Cyberdeck 2.0 yourself
 
-Keep the keyboard connected before starting. From an SSH terminal on the Pi:
+These steps begin after Raspberry Pi OS, SSH and the 3.5-inch display are
+working. The tested account name is `ee`. Connect the wired keyboard before
+starting, then open an SSH terminal on the Pi.
+
+### 1. Install the download tools
 
 ```bash
-git clone https://github.com/peepon95/cyberdeck.git
-cd cyberdeck
-sudo ./install.sh
+sudo apt update
+sudo apt install -y curl unzip
 ```
 
-Press Enter to install all apps, which is recommended for the first workshop.
-To install a specific set without prompts:
+### 2. Download the latest release
 
 ```bash
+cd ~
+mkdir -p cyberdeck-download
+cd cyberdeck-download
+curl -L -o cyberdeck-workshop.zip https://github.com/peepon95/cyberdeck/releases/latest/download/cyberdeck-workshop.zip
+curl -L -o SHA256SUMS https://github.com/peepon95/cyberdeck/releases/latest/download/SHA256SUMS
+```
+
+### 3. Verify the download
+
+```bash
+sha256sum -c SHA256SUMS
+```
+
+Continue only when the result says `cyberdeck-workshop.zip: OK`.
+
+### 4. Extract and check the package
+
+```bash
+unzip cyberdeck-workshop.zip
+cd cyberdeck-workshop
+./scripts/check.sh
+```
+
+The software checks should pass. The laptop-style hardware report may say that
+`/dev/fb1` or Linux input devices are missing if the display driver has not been
+finished yet; fix the hardware checkpoint before launching the menu.
+
+### 5. Install the complete deck
+
+```bash
+sudo ./install.sh --all
+```
+
+The installer validates all eight apps, backs up an existing `/home/ee/menu.py`
+and moves any previous Cyberdeck 2.0 installation into a timestamped recovery
+folder. It does not reboot automatically.
+
+To install only selected apps instead, list them first and then provide their
+IDs:
+
+```bash
+./install.sh --list
 sudo ./install.sh --apps chinese-lingo,makan-ninja,paint
 ```
 
-The installer checks every selected app, moves an existing Cyberdeck 2.0
-installation to a timestamped backup, backs up `/home/ee/menu.py`, and then
-installs the new menu. It does not reboot automatically.
-
-When the installer finishes:
+### 6. Reboot and test
 
 ```bash
 sudo reboot
 ```
 
-Always shut down safely before removing power:
+After the Pi restarts, confirm that:
+
+- The screen shows `CYBERDECK 2.0`.
+- Touch can select and launch an app.
+- Keyboard arrows and Enter move through the menu.
+- Chinese Lingo and Makan Ninja both respond to the stylus.
+
+### 7. Shut down safely
 
 ```bash
 sync
 sudo shutdown -h now
 ```
 
-Wait until screen and activity LEDs have stopped before unplugging power.
+Wait until the display and activity light have stopped before removing power.
 
-## Workshop approach
+### Install from the source repository instead
 
-Everyone installs the same working foundation first. Each participant then
-chooses one app to understand and customize. The `README.md` inside every app
-suggests safe first changes, and `templates/blank-game` is the starting point
-for an original app.
+People who want to read or modify the current source can use Git:
 
-See:
+```bash
+sudo apt install -y git
+git clone https://github.com/peepon95/cyberdeck.git
+cd cyberdeck
+./scripts/check.sh
+sudo ./install.sh --all
+```
 
-- [Friend testing checklist](docs/FRIEND_TEST.md)
-- [Hardware and compatibility](docs/HARDWARE.md)
-- [Customizing with Codex](docs/CUSTOMIZE_WITH_CODEX.md)
-- [Third-party notices](THIRD_PARTY_NOTICES.md)
+For a workshop, use the release ZIP because it points to a fixed, packaged
+version. Use the Git clone when developing and customizing the code.
 
 ## Development checks
 
