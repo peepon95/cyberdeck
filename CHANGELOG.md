@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.1.0-test — friend testing
 
 - Cleaned the original working folder into a workshop-safe package.
 - Added manifest-based app discovery and selectable installation.

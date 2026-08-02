@@ -8,7 +8,7 @@ RELEASE_STAGE="$(mktemp -d "${TMPDIR:-/tmp}/cyberdeck-release.XXXXXX")"
 trap 'rm -rf "$RELEASE_STAGE"' EXIT
 
 mkdir -p "$RELEASE_STAGE/cyberdeck-workshop" "$OUT_DIR"
-for path in apps core docs scripts templates tests .github .gitignore CHANGELOG.md README.md THIRD_PARTY_NOTICES.md install.sh; do
+for path in apps core docs scripts templates tests .github .gitignore CHANGELOG.md LICENSE README.md THIRD_PARTY_NOTICES.md install.sh; do
   cp -R "$ROOT/$path" "$RELEASE_STAGE/cyberdeck-workshop/"
 done
 find "$RELEASE_STAGE" -type d -name __pycache__ -prune -exec rm -rf {} +

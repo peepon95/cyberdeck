@@ -10,5 +10,9 @@ project. The required upstream license texts are preserved in
 
 Source project: <https://github.com/skishore/makemeahanzi>
 
+The repository's MIT License covers the original Cyberdeck workshop code. It
+does not replace or override the licence terms that apply to these third-party
+files and generated data.
+
 No ebooks, private journals, device backups, Wi-Fi credentials, SSH keys or
 participant progress files are included in this repository.

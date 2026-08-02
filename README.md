@@ -103,9 +103,12 @@ Maintainers can create the website download asset with:
 This produces `dist/cyberdeck-workshop.zip` and `dist/SHA256SUMS` for a GitHub
 Release.
 
-## Project status
+## Project status and licence
 
-This is the first cleaned workshop package. Keep the repository private while
-testing if you do not want participants to see unfinished releases. Before a
-public workshop, choose a license for the original workshop code and publish a
-tested GitHub Release ZIP.
+This is the first cleaned workshop package. The original workshop code is
+available under the [MIT License](LICENSE), so participants can learn from,
+modify and share it. Chinese Lingo includes separately licensed third-party
+data; those terms and notices remain in `apps/chinese-lingo/licenses/`.
+
+Releases labelled as test builds still need a fresh-card hardware test before
+they should be used for a public workshop.
