@@ -2,8 +2,8 @@
 
 A beginner-friendly, offline game deck built with a Raspberry Pi, a 480×320
 touchscreen and plain Python. Participants assemble the hardware, install a
-tested collection of apps, then use the included examples and Codex to create
-their own.
+tested collection of apps, then use the included examples to understand,
+improve and create their own games.
 
 ## Tested reference build
 
@@ -13,8 +13,8 @@ their own.
 - 16 GB or larger microSD card
 - Raspberry Pi OS Legacy (Bookworm), 32-bit Lite
 - Stable 5 V / 2 A micro-USB power supply or power bank
-- Wired USB keyboard and micro-USB OTG data adapter (recommended)
-- Laptop with a microSD reader and 2.4 GHz Wi-Fi or hotspot
+- Laptop with a microSD reader and a phone hotspot that supports 2.4 GHz
+- Wired or Bluetooth keyboard (optional for the first workshop; useful later)
 
 The Python game logic can be adapted to other Linux Raspberry Pi boards, but
 the current package expects a 480×320 RGB565 framebuffer at `/dev/fb1` and a
@@ -35,8 +35,8 @@ their display, input, power and boot settings to be tested.
 ## Install Cyberdeck 2.0 yourself
 
 These steps begin after Raspberry Pi OS, SSH and the 3.5-inch display are
-working. The tested account name is `ee`. Connect the wired keyboard before
-starting, then open an SSH terminal on the Pi.
+working. Open an SSH terminal on the Pi using the username you chose in
+Raspberry Pi Imager; a keyboard connected directly to the Cyberdeck is optional.
 
 ### 1. Install the download tools
 
@@ -45,19 +45,24 @@ sudo apt update
 sudo apt install -y curl unzip
 ```
 
-### 2. Download the latest release
+### 2. Download the workshop package
+
+Participants need **`cyberdeck-workshop.zip`**. `SHA256SUMS` is an optional
+integrity check. Do not use GitHub's automatic **Source code (zip)** or
+**Source code (tar.gz)** files; those are repository snapshots, not the
+prepared workshop package.
 
 ```bash
 cd ~
 mkdir -p cyberdeck-download
 cd cyberdeck-download
-curl -L -o cyberdeck-workshop.zip https://github.com/peepon95/cyberdeck/releases/latest/download/cyberdeck-workshop.zip
-curl -L -o SHA256SUMS https://github.com/peepon95/cyberdeck/releases/latest/download/SHA256SUMS
+curl -fL -o cyberdeck-workshop.zip https://github.com/peepon95/cyberdeck/releases/latest/download/cyberdeck-workshop.zip
 ```
 
-### 3. Verify the download
+### 3. Verify the download (optional but recommended)
 
 ```bash
+curl -fL -o SHA256SUMS https://github.com/peepon95/cyberdeck/releases/latest/download/SHA256SUMS
 sha256sum -c SHA256SUMS
 ```
 
@@ -66,7 +71,7 @@ Continue only when the result says `cyberdeck-workshop.zip: OK`.
 ### 4. Extract and check the package
 
 ```bash
-unzip cyberdeck-workshop.zip
+unzip -o cyberdeck-workshop.zip
 cd cyberdeck-workshop
 ./scripts/check.sh
 ```
@@ -75,15 +80,17 @@ The software checks should pass. The laptop-style hardware report may say that
 `/dev/fb1` or Linux input devices are missing if the display driver has not been
 finished yet; fix the hardware checkpoint before launching the menu.
 
-### 5. Install the complete deck
+### 5. Choose and install your apps
 
 ```bash
-sudo ./install.sh --all
+./install.sh --list
+sudo ./install.sh
 ```
 
-The installer validates all eight apps, backs up an existing `/home/ee/menu.py`
-and moves any previous Cyberdeck 2.0 installation into a timestamped recovery
-folder. It does not reboot automatically.
+Press Enter to install every app, or enter the numbers of the apps you want.
+The installer validates the selected apps, backs up an existing menu and moves
+any previous Cyberdeck 2.0 installation into a timestamped recovery folder. It
+does not reboot automatically.
 
 To install only selected apps instead, list them first and then provide their
 IDs:
@@ -103,7 +110,7 @@ After the Pi restarts, confirm that:
 
 - The screen shows `CYBERDECK 2.0`.
 - Touch can select and launch an app.
-- Keyboard arrows and Enter move through the menu.
+- If you connected an optional keyboard, arrows and Enter move through the menu.
 - Chinese Lingo and Makan Ninja both respond to the stylus.
 
 ### 7. Shut down safely
@@ -153,10 +160,7 @@ Release.
 
 ## Project status and licence
 
-This is the first cleaned workshop package. The original workshop code is
+This is the first cleaned workshop package. The workshop code is
 available under the [MIT License](LICENSE), so participants can learn from,
 modify and share it. Chinese Lingo includes separately licensed third-party
 data; those terms and notices remain in `apps/chinese-lingo/licenses/`.
-
-Releases labelled as test builds still need a fresh-card hardware test before
-they should be used for a public workshop.

@@ -9,13 +9,13 @@
 | microSD card | 16 GB or larger, plus a laptop card reader. |
 | Power | Stable 5 V / 2 A micro-USB supply or power bank and a known-good cable. |
 | Stylus | Recommended for the resistive touchscreen and Chinese stroke practice. |
-| Wired USB keyboard | Workshop default for menu control and the Journal app. |
-| Micro-USB OTG data adapter | Connects the keyboard to the Pi's USB data port. |
+| Wired or Bluetooth keyboard | Optional for the first workshop; useful later for the Journal app and menu navigation. |
+| Micro-USB OTG data adapter | Only needed when using a wired keyboard. |
 | Laptop | Mac or Windows with a terminal, Raspberry Pi Imager and Wi-Fi access. |
 
-Bluetooth keyboards are an optional extension after the core deck works. Bring
-a wired keyboard because Bluetooth pairing, battery and reconnection behaviour
-varies between models.
+The first workshop can be completed from the laptop over SSH and with the
+touchscreen. Explore wired or Bluetooth keyboard setup only after the core deck
+works, because adapters, batteries and reconnection behaviour vary by model.
 
 ## Facilitator spares
 
@@ -27,13 +27,12 @@ varies between models.
 
 Never put participant passwords or Wi-Fi credentials in this repository.
 
-## Other Raspberry Pi boards
+## Workshop board choices
 
-- **Pi Zero 2 W with header:** fully supported.
-- **Pi Zero W/WH:** similar GPIO layout but substantially slower; test animation-heavy apps.
-- **Pi 3B+ or Pi 4B:** adaptable, but physically larger with different USB and power arrangements.
-- **Pi 5:** a separate porting track until display, touch and boot behaviour is tested.
-- **Pico, Arduino and ESP32:** not compatible with this Linux/Python framebuffer package.
+- **Pi Zero 2 W with header — fully supported:** the board used by the workshop
+  and the reference for every instruction.
+- **Pi Zero W / Zero WH — experimental:** a cheaper board with a similar GPIO
+  layout, but it is substantially slower and animation-heavy games may stutter.
 
-For any alternative, verify `/dev/fb1`, `/dev/input/event*`, the screen overlay,
-touch calibration, RGB565 format, 480×320 dimensions and safe startup/shutdown.
+The workshop uses the Pi Zero 2 W with header. Anyone choosing a Zero W / Zero
+WH should expect to test performance and troubleshoot separately.

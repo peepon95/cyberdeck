@@ -14,6 +14,7 @@ done
 find "$RELEASE_STAGE" -type d -name __pycache__ -prune -exec rm -rf {} +
 find "$RELEASE_STAGE" -type f -name '*.pyc' -delete
 
+rm -f "$ARCHIVE"
 (cd "$RELEASE_STAGE" && zip -qr "$ARCHIVE" cyberdeck-workshop)
 
 if command -v sha256sum >/dev/null 2>&1; then
