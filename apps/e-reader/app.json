@@ -1,0 +1,8 @@
+{
+  "id": "e-reader",
+  "name": "E READER",
+  "entry": "app.py",
+  "color": "yellow",
+  "order": 70,
+  "enabled": true
+}

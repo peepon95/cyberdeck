@@ -1,0 +1,8 @@
+{
+  "id": "flappy-bird",
+  "name": "FLAPPY BIRD",
+  "entry": "app.py",
+  "color": "green",
+  "order": 40,
+  "enabled": true
+}

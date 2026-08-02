@@ -1,0 +1,8 @@
+{
+  "id": "chinese-lingo",
+  "name": "CHINESE LINGO",
+  "entry": "app.py",
+  "color": "cyan",
+  "order": 10,
+  "enabled": true
+}

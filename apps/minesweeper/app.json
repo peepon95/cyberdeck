@@ -1,0 +1,8 @@
+{
+  "id": "minesweeper",
+  "name": "MINESWEEPER",
+  "entry": "app.py",
+  "color": "orange",
+  "order": 50,
+  "enabled": true
+}

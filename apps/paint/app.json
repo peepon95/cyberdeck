@@ -1,0 +1,8 @@
+{
+  "id": "paint",
+  "name": "PAINT",
+  "entry": "app.py",
+  "color": "magenta",
+  "order": 60,
+  "enabled": true
+}

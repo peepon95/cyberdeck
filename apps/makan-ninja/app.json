@@ -1,0 +1,8 @@
+{
+  "id": "makan-ninja",
+  "name": "MAKAN NINJA",
+  "entry": "app.py",
+  "color": "magenta",
+  "order": 20,
+  "enabled": true
+}

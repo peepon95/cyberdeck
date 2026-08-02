@@ -1,0 +1,8 @@
+{
+  "id": "tic-tac-toe",
+  "name": "TIC TAC TOE",
+  "entry": "app.py",
+  "color": "cyan",
+  "order": 30,
+  "enabled": true
+}

@@ -1,0 +1,8 @@
+{
+  "id": "my-game",
+  "name": "MY GAME",
+  "entry": "app.py",
+  "color": "cyan",
+  "order": 90,
+  "enabled": true
+}
