@@ -22,6 +22,7 @@ workshop ZIP above.
 - Optional per-keyboard Bluetooth reconnect installer
 - Timestamped recovery backup flow
 - Dynamic menu discovery
+- Automatic `/dev/fb0` or `/dev/fb1` display detection
 - Portable save folders for any Raspberry Pi username
 - Journal framebuffer refresh fix
 - Chinese Lingo asset, progress and stroke-grading tests
