@@ -1,0 +1,15 @@
+[Unit]
+Description=Reconnect an optional Cyberdeck Bluetooth keyboard
+After=bluetooth.service
+Wants=bluetooth.service
+ConditionPathExists=/etc/default/cyberdeck-keyboard
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/default/cyberdeck-keyboard
+ExecStart=/usr/local/sbin/cyberdeck-keyboard-reconnect
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

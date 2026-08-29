@@ -17,6 +17,20 @@ The first workshop can be completed from the laptop over SSH and with the
 touchscreen. Explore wired or Bluetooth keyboard setup only after the core deck
 works, because adapters, batteries and reconnection behaviour vary by model.
 
+## Touchscreen checkpoint
+
+After installing the linked screen driver and rebooting, run this from the
+extracted workshop folder before installing any games:
+
+```bash
+sudo ./scripts/check-touch.sh
+```
+
+Press, tap and drag with the stylus during the ten-second test. The check must
+report `[OK] Touchscreen responded`. Merely seeing `ADS7846 Touchscreen` in Linux
+is not enough: a working touch layer must also generate input bytes or GPIO17
+interrupts. Power down before reseating the screen.
+
 ## Facilitator spares
 
 - Two or three boot-tested microSD cards

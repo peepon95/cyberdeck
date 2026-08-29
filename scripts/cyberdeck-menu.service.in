@@ -1,0 +1,18 @@
+[Unit]
+Description=Cyberdeck 2.0 menu
+After=multi-user.target
+
+[Service]
+Type=simple
+User=@TARGET_USER@
+SupplementaryGroups=input video
+WorkingDirectory=@TARGET_HOME@
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 @MENU_TARGET@
+Restart=always
+RestartSec=2
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

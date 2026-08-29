@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.2.0 — fresh-SD workshop installer
+
+- Added a system service that starts the Cyberdeck menu automatically after boot.
+- Restored Journal to the tracked source and made all save folders username-independent.
+- Added a raw ADS7846 touchscreen response check before game installation.
+- Added an optional Bluetooth keyboard reconnect installer without a personal MAC address.
+- Prevented the menu's keyboard scanner from consuming touchscreen events.
+- Forced Journal frames to refresh reliably on the tested fbtft display.
+- Added a two-app installation test and expanded release validation.
+
 ## v0.1.0 — first workshop package
 
 - Cleaned the original working folder into a workshop-safe package.

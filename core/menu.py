@@ -202,11 +202,12 @@ K_UP = 103
 K_DOWN = 108
 K_ENTER = 28
 
-def open_keyboards(fds=None):
-    """Hot-plug input devices without reopening devices already being watched."""
+def open_keyboards(fds=None, excluded_paths=None):
+    """Hot-plug input devices without consuming touchscreen events."""
     if fds is None:
         fds = {}
-    live_paths = set(glob.glob("/dev/input/event*"))
+    excluded_paths = set(excluded_paths or ())
+    live_paths = set(glob.glob("/dev/input/event*")) - excluded_paths
     for path in list(fds):
         if path not in live_paths:
             try:
@@ -271,7 +272,7 @@ def main():
         sys.exit(1)
     touch_dev = find_touch_device()
     print("Touch: " + str(touch_dev))
-    kb_fds = open_keyboards()
+    kb_fds = open_keyboards(excluded_paths={touch_dev} if touch_dev else None)
     last_input_scan = time.time()
     kb_sel = 0
     draw_menu(kb_sel)
@@ -280,7 +281,10 @@ def main():
     try:
         while True:
             if time.time() - last_input_scan >= 1.0:
-                kb_fds = open_keyboards(kb_fds)
+                kb_fds = open_keyboards(
+                    kb_fds,
+                    excluded_paths={touch_dev} if touch_dev else None,
+                )
                 last_input_scan = time.time()
             keys = poll_keys(kb_fds)
             if keys:

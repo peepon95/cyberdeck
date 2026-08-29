@@ -99,8 +99,11 @@ def map_touch(rx, ry):
     sy = int((rx - 670) / 2918.0 * 320)
     return (max(0, min(W-1, sx)), max(0, min(H-1, sy)))
 
-BOOKS_DIR = "/home/ee/books"
-PROGRESS_FILE = "/home/ee/books/.progress.json"
+BOOKS_DIR = os.environ.get(
+    "CYBERDECK_BOOKS_DIR",
+    os.path.join(os.path.expanduser("~"), "books"),
+)
+PROGRESS_FILE = os.path.join(BOOKS_DIR, ".progress.json")
 CHARS_PER_LINE = 76
 LINES_PER_PAGE = 18
 LINE_H = 16

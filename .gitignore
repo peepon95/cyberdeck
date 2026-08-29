@@ -15,7 +15,7 @@ build/
 device-backups/
 backup/
 books/*.txt
-journal/
+/journal/
 *.journal
 .hanzi_quest_progress.json
 .makan_ninja_best

@@ -14,6 +14,10 @@ PY
 if [[ -z "$TARGET_HOME" ]]; then
   TARGET_HOME="$(eval echo "~$TARGET_USER")"
 fi
+if [[ ! "$TARGET_USER" =~ ^[a-z_][a-z0-9_-]*[$]?$ ]]; then
+  echo "Unsupported target username: $TARGET_USER" >&2
+  exit 2
+fi
 INSTALL_ROOT="${CYBERDECK_INSTALL_ROOT:-$TARGET_HOME/cyberdeck}"
 MENU_TARGET="${CYBERDECK_MENU_TARGET:-$TARGET_HOME/menu.py}"
 STAMP="$(date +%Y%m%d-%H%M%S)"
@@ -139,9 +143,23 @@ if (( EUID == 0 )); then
   TARGET_GROUP="$(id -gn "$TARGET_USER")"
   chown -R "$TARGET_USER:$TARGET_GROUP" "$INSTALL_ROOT" "$TARGET_HOME/books" "$TARGET_HOME/journal"
   chown "$TARGET_USER:$TARGET_GROUP" "$MENU_TARGET"
+
+  if [[ "${CYBERDECK_SKIP_SYSTEMD:-0}" != "1" ]]; then
+    SERVICE_STAGE="$STAGE/cyberdeck-menu.service"
+    sed \
+      -e "s|@TARGET_USER@|$TARGET_USER|g" \
+      -e "s|@TARGET_HOME@|$TARGET_HOME|g" \
+      -e "s|@MENU_TARGET@|$MENU_TARGET|g" \
+      "$PACKAGE_DIR/scripts/cyberdeck-menu.service.in" > "$SERVICE_STAGE"
+    install -o root -g root -m 644 "$SERVICE_STAGE" /etc/systemd/system/cyberdeck-menu.service
+    systemctl daemon-reload
+    systemctl enable cyberdeck-menu.service
+  fi
+else
+  echo "Run the installer with sudo to enable automatic menu startup." >&2
 fi
 
 sync
 echo
 echo "Cyberdeck 2.0 installed for $TARGET_USER with ${#SELECTED_IDS[@]} app(s)."
-echo "Reboot when ready: sudo reboot"
+echo "The menu will start automatically after reboot: sudo reboot"

@@ -436,7 +436,7 @@ def find_touch_device():
 def map_touch(raw_x, raw_y):
     # Calibrated for this cyberdeck's rotated XPT2046 panel.  The display X
     # axis comes from reversed raw Y, while display Y comes from raw X.
-    # Keep this in sync with /home/ee/menu.py and Hanzi Quest.
+    # Keep this in sync with the Cyberdeck menu and Chinese Lingo.
     screen_x = int((3708 - raw_y) / 3300.0 * W)
     screen_y = int((raw_x - 670) / 2918.0 * H)
     return max(0, min(W - 1, screen_x)), max(0, min(H - 1, screen_y))
@@ -478,7 +478,10 @@ def main():
         return
     touch_fd = os.open(touch_path, os.O_RDONLY | os.O_NONBLOCK)
 
-    best_path = os.environ.get("MAKAN_NINJA_BEST", "/home/ee/.makan_ninja_best")
+    best_path = os.environ.get(
+        "MAKAN_NINJA_BEST",
+        os.path.join(os.path.expanduser("~"), ".makan_ninja_best"),
+    )
     try:
         with open(best_path, "r") as handle:
             high_score = int(handle.read().strip())

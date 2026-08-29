@@ -8,7 +8,7 @@ improve and create their own games.
 ## Tested reference build
 
 - Raspberry Pi Zero 2 W with a pre-soldered 40-pin header
-- 3.5-inch 480×320 SPI/GPIO touchscreen using the `waveshare35c` overlay
+- 3.5-inch 480×320 SPI/GPIO touchscreen using the `waveshare35a` overlay
 - XPT2046/ADS7846-compatible resistive touch input and stylus
 - 16 GB or larger microSD card
 - Raspberry Pi OS Legacy (Bookworm), 32-bit Lite
@@ -74,11 +74,13 @@ Continue only when the result says `cyberdeck-workshop.zip: OK`.
 unzip -o cyberdeck-workshop.zip
 cd cyberdeck-workshop
 ./scripts/check.sh
+sudo ./scripts/check-touch.sh
 ```
 
-The software checks should pass. The laptop-style hardware report may say that
-`/dev/fb1` or Linux input devices are missing if the display driver has not been
-finished yet; fix the hardware checkpoint before launching the menu.
+The software checks should pass. During the ten-second touch check, press, tap
+and drag with the stylus. Continue only when it reports `[OK] Touchscreen
+responded`. If it reports no signal, fix the screen connection before installing
+the games; reinstalling Python code cannot repair a missing GPIO touch signal.
 
 ### 5. Choose and install your apps
 
@@ -90,7 +92,8 @@ sudo ./install.sh
 Press Enter to install every app, or enter the numbers of the apps you want.
 The installer validates the selected apps, backs up an existing menu and moves
 any previous Cyberdeck 2.0 installation into a timestamped recovery folder. It
-does not reboot automatically.
+also enables the Cyberdeck menu to start automatically after boot. It does not
+reboot automatically.
 
 To install only selected apps instead, list them first and then provide their
 IDs:
@@ -113,9 +116,22 @@ After the Pi restarts, confirm that:
 - If you connected an optional keyboard, arrows and Enter move through the menu.
 - Chinese Lingo and Makan Ninja both respond to the stylus.
 
+### Optional Bluetooth keyboard reconnect
+
+Pair and trust the keyboard once with `bluetoothctl`, note its MAC address, then
+enable automatic reconnect with:
+
+```bash
+sudo ./scripts/install-keyboard-reconnect.sh AA:BB:CC:DD:EE:FF
+```
+
+The keyboard must still be charged, switched on and using the same Bluetooth
+profile. The reconnect service retries every 15 seconds.
+
 ### 7. Shut down safely
 
 ```bash
+sync
 sync
 sudo shutdown -h now
 ```
@@ -160,7 +176,7 @@ Release.
 
 ## Project status and licence
 
-This is the first cleaned workshop package. The workshop code is
+This is the cleaned workshop package. The workshop code is
 available under the [MIT License](LICENSE), so participants can learn from,
 modify and share it. Chinese Lingo includes separately licensed third-party
 data; those terms and notices remain in `apps/chinese-lingo/licenses/`.

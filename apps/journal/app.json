@@ -1,0 +1,8 @@
+{
+  "id": "journal",
+  "name": "JOURNAL",
+  "entry": "app.py",
+  "color": "red",
+  "order": 80,
+  "enabled": true
+}
