@@ -8,7 +8,7 @@ improve and create their own games.
 ## Tested reference build
 
 - Raspberry Pi Zero 2 W with a pre-soldered 40-pin header
-- 3.5-inch 480×320 SPI/GPIO touchscreen using the `waveshare35a` overlay
+- 3.5-inch 480×320 SPI/GPIO touchscreen using the `tft35a` overlay
 - XPT2046/ADS7846-compatible resistive touch input and stylus
 - 16 GB or larger microSD card
 - Raspberry Pi OS Legacy (Bookworm), 32-bit Lite
