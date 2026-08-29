@@ -5,6 +5,7 @@ import struct, os, time, random, mmap, glob
 W, H = 480, 320
 BPP = 2
 FBSIZE = W * H * BPP
+FRAMEBUFFER = os.environ.get("CYBERDECK_FB", "/dev/fb1")
 
 def c565(r, g, b):
     return ((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3)
@@ -27,7 +28,7 @@ C_OVER  = c565(10,5,20)
 
 # ---------- framebuffer ----------
 buf = bytearray(FBSIZE)
-fb_fd = os.open("/dev/fb1", os.O_RDWR)
+fb_fd = os.open(FRAMEBUFFER, os.O_RDWR)
 fb_mm = mmap.mmap(fb_fd, FBSIZE, mmap.MAP_SHARED, mmap.PROT_WRITE | mmap.PROT_READ)
 
 def sp(x, y, c):

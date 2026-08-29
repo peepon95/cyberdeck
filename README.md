@@ -16,9 +16,9 @@ improve and create their own games.
 - Laptop with a microSD reader and a phone hotspot that supports 2.4 GHz
 - Wired or Bluetooth keyboard (optional for the first workshop; useful later)
 
-The Python game logic can be adapted to other Linux Raspberry Pi boards, but
-the current package expects a 480×320 RGB565 framebuffer at `/dev/fb1` and a
-Linux input device for touch. Other screens and Raspberry Pi models require
+The Python game logic can be adapted to other Linux Raspberry Pi boards. The
+current package automatically uses `/dev/fb1` or `/dev/fb0` for its 480×320
+RGB565 display and a Linux input device for touch. Other screens and Raspberry Pi models require
 their display, input, power and boot settings to be tested.
 
 ## Included apps

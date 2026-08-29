@@ -17,6 +17,7 @@ FBSIZE = W * H * BPP
 PRACTICE_X, PRACTICE_Y, PRACTICE_SIZE = 12, 54, 244
 ASSET_INSET = 4
 APP_VERSION = "1.2"
+DEFAULT_FRAMEBUFFER = os.environ.get("CYBERDECK_FB", "/dev/fb1")
 
 
 def c565(r, g, b):
@@ -90,7 +91,7 @@ FONT = {
 
 
 class Canvas(object):
-    def __init__(self, framebuffer="/dev/fb1"):
+    def __init__(self, framebuffer=DEFAULT_FRAMEBUFFER):
         self.buffer = bytearray(FBSIZE)
         self.framebuffer = framebuffer
         self.fd = None
@@ -493,7 +494,7 @@ class Progress(object):
 
 
 class HanziQuest(object):
-    def __init__(self, asset_path, progress_path, framebuffer="/dev/fb1", touch_path="/dev/input/event0"):
+    def __init__(self, asset_path, progress_path, framebuffer=DEFAULT_FRAMEBUFFER, touch_path="/dev/input/event0"):
         with open(asset_path, "r", encoding="utf-8") as handle:
             bundle = json.load(handle)
         self.course = bundle["course"]
@@ -787,7 +788,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--assets", default=asset_default)
     parser.add_argument("--progress", default=progress_default)
-    parser.add_argument("--framebuffer", default="/dev/fb1")
+    parser.add_argument("--framebuffer", default=DEFAULT_FRAMEBUFFER)
     parser.add_argument("--touch", default="/dev/input/event0")
     parser.add_argument("--preview-dir")
     args = parser.parse_args()

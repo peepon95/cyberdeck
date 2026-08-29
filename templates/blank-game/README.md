@@ -10,5 +10,5 @@
 Example Codex prompt:
 
 > Turn this blank Cyberdeck app into a touchscreen memory-matching game. Keep
-> it compatible with Python 3, `/dev/fb1`, a 480×320 RGB565 display and Linux
+> it compatible with Python 3, the `CYBERDECK_FB` framebuffer, a 480×320 RGB565 display and Linux
 > input events. Add a clear way to return to the main menu.

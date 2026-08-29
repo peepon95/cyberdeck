@@ -15,7 +15,8 @@ DARKGREEN=c565(0,150,0); MAROON=c565(128,0,0); TEAL=c565(0,128,128); BLACK=c565(
 NUM_COLORS=[None,BLUE,DARKGREEN,RED,DARKBLUE,MAROON,TEAL,BLACK,GRAY]
 
 FBSIZE=W*H*BPP
-fb_fd=os.open("/dev/fb1",os.O_RDWR)
+FRAMEBUFFER=os.environ.get("CYBERDECK_FB", "/dev/fb1")
+fb_fd=os.open(FRAMEBUFFER,os.O_RDWR)
 fb=mmap.mmap(fb_fd,FBSIZE,mmap.MAP_SHARED,mmap.PROT_WRITE|mmap.PROT_READ)
 
 def sp(x,y,c):

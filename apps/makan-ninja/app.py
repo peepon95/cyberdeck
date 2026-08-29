@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Makan Ninja - framebuffer + XPT2046 edition.
 
-No third-party packages are required on the cyberdeck.  The game writes RGB565
-pixels directly to /dev/fb1 and reads Linux input events from the touchscreen.
+No third-party packages are required on the cyberdeck. The game writes RGB565
+pixels directly to the detected framebuffer and reads Linux input events from
+the touchscreen.
 """
 
 import math
@@ -54,10 +55,10 @@ def packed(color):
 def open_framebuffer(path):
     global fb_fd, fb_mm
     flags = os.O_RDWR
-    if path != "/dev/fb1":
+    if path not in ("/dev/fb0", "/dev/fb1"):
         flags |= os.O_CREAT
     fb_fd = os.open(path, flags, 0o644)
-    if path != "/dev/fb1":
+    if path not in ("/dev/fb0", "/dev/fb1"):
         os.ftruncate(fb_fd, FBSIZE)
     fb_mm = mmap.mmap(
         fb_fd, FBSIZE, mmap.MAP_SHARED, mmap.PROT_WRITE | mmap.PROT_READ

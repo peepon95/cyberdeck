@@ -6,6 +6,7 @@ import struct, os, time, glob, mmap, pwd
 W, H = 480, 320
 BPP = 2
 FBSIZE = W * H * BPP
+FRAMEBUFFER = os.environ.get("CYBERDECK_FB", "/dev/fb1")
 USERNAME = pwd.getpwuid(os.getuid()).pw_name
 JOURNAL_DIR = os.environ.get(
     "CYBERDECK_JOURNAL_DIR",
@@ -37,7 +38,7 @@ ROLL_HI = c(255, 250, 248)
 KNOB    = c(205, 0, 10)
 KNOB_DK = c(135, 0, 6)
 
-fb_fd = os.open("/dev/fb1", os.O_RDWR)
+fb_fd = os.open(FRAMEBUFFER, os.O_RDWR)
 fb = mmap.mmap(fb_fd, FBSIZE, mmap.MAP_SHARED, mmap.PROT_WRITE | mmap.PROT_READ)
 
 def present():

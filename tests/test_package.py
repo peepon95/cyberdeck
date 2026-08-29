@@ -43,6 +43,8 @@ def main():
         seen.add(manifest["id"])
         entry = manifest_path.parent / manifest["entry"]
         assert entry.is_file(), f"Missing entry: {entry}"
+        entry_text = entry.read_text(encoding="utf-8")
+        assert "CYBERDECK_FB" in entry_text, f"{entry}: framebuffer is not configurable"
         py_compile.compile(str(entry), doraise=True)
 
     if args.require_all_apps:

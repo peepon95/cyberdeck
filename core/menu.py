@@ -23,7 +23,19 @@ WHITE = c565(255, 255, 255)
 DARKGRAY = c565(25, 25, 40)
 ORANGE = c565(255, 140, 0)
 buf = bytearray(W * H * BPP)
-FB_PATH = os.environ.get("CYBERDECK_FB", "/dev/fb1")
+
+def find_framebuffer():
+    configured = os.environ.get("CYBERDECK_FB")
+    if configured:
+        return configured
+    for candidate in ("/dev/fb1", "/dev/fb0"):
+        if os.path.exists(candidate):
+            return candidate
+    return "/dev/fb1"
+
+
+FB_PATH = find_framebuffer()
+os.environ["CYBERDECK_FB"] = FB_PATH
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_APPS_DIR = (
     os.path.join(os.path.dirname(SCRIPT_DIR), "apps")

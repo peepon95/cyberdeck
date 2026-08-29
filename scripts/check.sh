@@ -9,10 +9,19 @@ bash -n "$ROOT/install.sh" "$ROOT/scripts/"*.sh
 
 echo
 echo "Hardware check (missing devices are expected on a laptop):"
-if [[ -e "${CYBERDECK_FB:-/dev/fb1}" ]]; then
-  echo "  [OK] framebuffer ${CYBERDECK_FB:-/dev/fb1}"
+FRAMEBUFFER="${CYBERDECK_FB:-}"
+if [[ -z "$FRAMEBUFFER" ]]; then
+  for candidate in /dev/fb1 /dev/fb0; do
+    if [[ -e "$candidate" ]]; then
+      FRAMEBUFFER="$candidate"
+      break
+    fi
+  done
+fi
+if [[ -n "$FRAMEBUFFER" && -e "$FRAMEBUFFER" ]]; then
+  echo "  [OK] framebuffer $FRAMEBUFFER"
 else
-  echo "  [--] framebuffer /dev/fb1 not found"
+  echo "  [--] no framebuffer found at /dev/fb1 or /dev/fb0"
 fi
 
 if compgen -G '/dev/input/event*' >/dev/null; then
