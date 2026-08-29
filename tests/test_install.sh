@@ -17,4 +17,12 @@ test -f "$TEST_ROOT/home/cyberdeck/apps/chinese-lingo/app.py"
 test -f "$TEST_ROOT/home/cyberdeck/apps/paint/app.py"
 test ! -e "$TEST_ROOT/home/cyberdeck/apps/flappy-bird"
 
-echo "Installer test passed for a two-app selection."
+grep -Fxq 'After=local-fs.target getty@tty1.service' "$ROOT/scripts/cyberdeck-menu.service.in"
+grep -Fxq 'Conflicts=getty@tty1.service' "$ROOT/scripts/cyberdeck-menu.service.in"
+if grep -Fxq 'After=multi-user.target' "$ROOT/scripts/cyberdeck-menu.service.in"; then
+  echo "Menu service must not create a multi-user.target ordering cycle." >&2
+  exit 1
+fi
+grep -Fq 'systemctl restart cyberdeck-menu.service' "$ROOT/install.sh"
+
+echo "Installer test passed for app selection and boot-safe menu startup."

@@ -138,6 +138,7 @@ if [[ -e "$MENU_TARGET" ]]; then
 fi
 cp -p "$INSTALL_ROOT/core/menu.py" "$MENU_TARGET"
 mkdir -p "$TARGET_HOME/books" "$TARGET_HOME/journal"
+MENU_SERVICE_STARTED=0
 
 if (( EUID == 0 )); then
   TARGET_GROUP="$(id -gn "$TARGET_USER")"
@@ -154,6 +155,8 @@ if (( EUID == 0 )); then
     install -o root -g root -m 644 "$SERVICE_STAGE" /etc/systemd/system/cyberdeck-menu.service
     systemctl daemon-reload
     systemctl enable cyberdeck-menu.service
+    systemctl restart cyberdeck-menu.service
+    MENU_SERVICE_STARTED=1
   fi
 else
   echo "Run the installer with sudo to enable automatic menu startup." >&2
@@ -162,4 +165,7 @@ fi
 sync
 echo
 echo "Cyberdeck 2.0 installed for $TARGET_USER with ${#SELECTED_IDS[@]} app(s)."
-echo "The menu will start automatically after reboot: sudo reboot"
+if (( MENU_SERVICE_STARTED == 1 )); then
+  echo "The menu is running now and will start automatically after every reboot."
+  echo "Reboot once to verify automatic startup: sudo reboot"
+fi

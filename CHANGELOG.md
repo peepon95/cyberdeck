@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.2.1 — reliable menu startup
+
+- Removed a systemd boot-order cycle from the Cyberdeck menu service.
+- Reserved the small-screen console for Cyberdeck 2.0 so the Linux login prompt cannot overwrite it.
+- Started or restarted the menu during installation and kept automatic startup enabled for later boots.
+- Updated the workshop default to install all eight apps.
+
 ## v0.2.0 — fresh-SD workshop installer
 
 - Added a system service that starts the Cyberdeck menu automatically after boot.

@@ -82,18 +82,18 @@ and drag with the stylus. Continue only when it reports `[OK] Touchscreen
 responded`. If it reports no signal, fix the screen connection before installing
 the games; reinstalling Python code cannot repair a missing GPIO touch signal.
 
-### 5. Choose and install your apps
+### 5. Install the complete workshop deck
 
 ```bash
 ./install.sh --list
-sudo ./install.sh
+sudo ./install.sh --all
 ```
 
-Press Enter to install every app, or enter the numbers of the apps you want.
-The installer validates the selected apps, backs up an existing menu and moves
-any previous Cyberdeck 2.0 installation into a timestamped recovery folder. It
-also enables the Cyberdeck menu to start automatically after boot. It does not
-reboot automatically.
+Part 1 installs all eight apps so every participant leaves with the same complete
+deck. The installer validates the apps, backs up an existing menu and moves any
+previous Cyberdeck 2.0 installation into a timestamped recovery folder. It starts
+the menu immediately and enables it for every future boot. The menu owns the small
+screen instead of the Raspberry Pi login prompt; SSH remains available.
 
 To install only selected apps instead, list them first and then provide their
 IDs:
@@ -112,6 +112,7 @@ sudo reboot
 After the Pi restarts, confirm that:
 
 - The screen shows `CYBERDECK 2.0`.
+- The Raspberry Pi login prompt does not replace the menu.
 - Touch can select and launch an app.
 - If you connected an optional keyboard, arrows and Enter move through the menu.
 - Chinese Lingo and Makan Ninja both respond to the stylus.

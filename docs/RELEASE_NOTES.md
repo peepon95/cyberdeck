@@ -1,5 +1,11 @@
 # Cyberdeck 2.0 — Workshop Download
 
+## v0.2.1 startup fix
+
+The menu now takes ownership of the small display during boot instead of racing
+the Raspberry Pi `tty1` login prompt. Installation starts the menu immediately,
+and later power-ons return directly to Cyberdeck 2.0 while SSH remains available.
+
 This Cyberdeck 2.0 package can be installed on a freshly flashed workshop card.
 
 ## Which file should I download?
@@ -18,6 +24,7 @@ workshop ZIP above.
 - Eight app manifests and Python entry points
 - Full and selective installation flows
 - Automatic menu startup after reboot
+- Small-screen login prompt cannot overwrite the Cyberdeck menu
 - Ten-second raw touchscreen and GPIO interrupt test
 - Optional per-keyboard Bluetooth reconnect installer
 - Timestamped recovery backup flow

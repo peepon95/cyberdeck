@@ -1,6 +1,7 @@
 [Unit]
 Description=Cyberdeck 2.0 menu
-After=multi-user.target
+After=local-fs.target getty@tty1.service
+Conflicts=getty@tty1.service
 
 [Service]
 Type=simple
