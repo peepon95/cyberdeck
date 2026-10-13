@@ -138,11 +138,12 @@ if [[ -e "$MENU_TARGET" ]]; then
 fi
 cp -p "$INSTALL_ROOT/core/menu.py" "$MENU_TARGET"
 mkdir -p "$TARGET_HOME/books" "$TARGET_HOME/journal"
+mkdir -p "$TARGET_HOME/cyberdeck-wardrobe"/{tops,bottoms,shoes,accessories}
 MENU_SERVICE_STARTED=0
 
 if (( EUID == 0 )); then
   TARGET_GROUP="$(id -gn "$TARGET_USER")"
-  chown -R "$TARGET_USER:$TARGET_GROUP" "$INSTALL_ROOT" "$TARGET_HOME/books" "$TARGET_HOME/journal"
+  chown -R "$TARGET_USER:$TARGET_GROUP" "$INSTALL_ROOT" "$TARGET_HOME/books" "$TARGET_HOME/journal" "$TARGET_HOME/cyberdeck-wardrobe"
   chown "$TARGET_USER:$TARGET_GROUP" "$MENU_TARGET"
 
   if [[ "${CYBERDECK_SKIP_SYSTEMD:-0}" != "1" ]]; then

@@ -31,6 +31,10 @@ their display, input, power and boot settings to be tested.
 - Paint
 - E-Reader — bring your own legal `.txt` files
 - Journal — entries stay on the participant's device
+- Ee's Wardrobe — build outfits from starter clothes or photos of your own wardrobe
+
+Windows participants can follow the complete [Windows laptop workshop guide](docs/WINDOWS_WORKSHOP_SETUP.md),
+from flashing the microSD card through installing and opening Ee's Wardrobe.
 
 ## Install Cyberdeck 2.0 yourself
 
@@ -89,7 +93,7 @@ the games; reinstalling Python code cannot repair a missing GPIO touch signal.
 sudo ./install.sh --all
 ```
 
-Part 1 installs all eight apps so every participant leaves with the same complete
+Part 1 installs all nine apps so every participant leaves with the same complete
 deck. The installer validates the apps, backs up an existing menu and moves any
 previous Cyberdeck 2.0 installation into a timestamped recovery folder. It starts
 the menu immediately and enables it for every future boot. The menu owns the small

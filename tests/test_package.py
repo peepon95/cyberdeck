@@ -21,6 +21,7 @@ def main():
         raise SystemExit("No app manifests found")
 
     expected_apps = {
+        "cher-closet",
         "chinese-lingo",
         "e-reader",
         "flappy-bird",

@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.0 — Ee's Wardrobe and Windows workshop guide
+
+- Added Ee's Wardrobe with a Clueless-inspired clothing carousel and pixel-art fitting room.
+- Added phone uploads for personal tops and bottoms over the local Wi-Fi network.
+- Added a Windows laptop guide covering Raspberry Pi Imager, SSH, installation and recovery.
+- Added wardrobe folders to the installer and expanded package validation to nine apps.
+
 ## v0.2.1 — reliable menu startup
 
 - Removed a systemd boot-order cycle from the Cyberdeck menu service.

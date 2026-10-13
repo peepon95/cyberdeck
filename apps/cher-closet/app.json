@@ -1,0 +1,8 @@
+{
+  "id": "cher-closet",
+  "name": "EE'S WARDROBE",
+  "entry": "app.py",
+  "color": "yellow",
+  "order": 35,
+  "enabled": true
+}
